@@ -1,0 +1,56 @@
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.cf:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.mod-tab {
+  padding: 20px;
+  border: 10px solid skyblue;
+}
+.mod-tab .mod-tab-hd {
+  padding: 5px;
+  border: 2px solid skyblue;
+}
+.mod-tab .mod-tab-hd .tabItemStyle {
+  background: skyblue;
+  color: #fff;
+}
+.mod-tab .mod-tab-hd .tab-item {
+  float: left;
+  background: skyblue;
+  color: #fff;
+  text-align: center;
+  width: 100px;
+  line-height: 40px;
+}
+.mod-tab .mod-tab-hd .tab-item:nth-of-type(1),
+.mod-tab .mod-tab-hd .tab-item:nth-of-type(2) {
+  border-right: 1px solid #fff;
+}
+.mod-tab .content .tab-table {
+  border: 2px solid pink;
+  margin-top: 20px;
+  padding: 10px 5px;
+  text-align: center;
+}
+.mod-tab .content .tab-table .tdStyle {
+  float: left;
+  width: 100px;
+  line-height: 30px;
+}
+.mod-tab .content .tab-table .thead > .th {
+  float: left;
+  width: 100px;
+  line-height: 30px;
+}
+.mod-tab .content .tab-table .tbody .td {
+  float: left;
+  width: 100px;
+  line-height: 30px;
+}

@@ -1,0 +1,8 @@
+/node_modules/
+package-lock.json
+
+hw*/bin/
+hw*/routes/
+hw*/views/
+hw*/app.js
+hw*/gulp.js

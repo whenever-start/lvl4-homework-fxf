@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选项卡</title>
+	<link rel="stylesheet" href="./public/stylesheets/main.css">
+	<script src="./public/javascripts/vue.min.js"></script>
+	
+</head>
+<body>
+	<div class="mod-tab" id="mod-tab">
+		<div class="mod-tab-hd cf">
+			<div class="tab-item" v-for="(v,i) in cls" v-on:click="tabIdx = i">{{v}}</div>
+		</div>
+		<div class="content">
+			<div class="tab-table">
+				<div class="thead cf">
+					<div class="th">ID</div>
+					<div class="th">姓名</div>
+					<div class="th">年龄</div>
+					<div class="th">性别</div>
+				</div>
+				<div class="tbody">
+					<div class="tr cf" v-for="(v,i) in students[tabClass[tabIdx]]">
+						<div class="td">{{v.uid}}</div>
+						<div class="td">{{v.uname}}</div>
+						<div class="td">{{v.uage}}</div>
+						<div class="td">{{v.usex}}</div>
+					</div>
+				</div>
+				<div class="tfoot"></div>
+			</div>
+		</div>
+		<!-- 添加 弹窗 -->
+		<!-- 添加 弹窗 end -->
+	</div>
+
+	<script>
+		let students = {
+			students_G1:[
+				{
+					uid:'G1_001',
+					uname:'李卉',
+					uage:19,
+					usex:'男',
+				},
+				{
+					uid:'G1_002',
+					uname:'李忠',
+					uage:17,
+					usex:'男',
+				},
+				{
+					uid:'G1_003',
+					uname:'刘能',
+					uage:18,
+					usex:'女',
+				},
+				{
+					uid:'G1_004',
+					uname:'成文',
+					uage:18,
+					usex:'男',
+				},
+				{
+					uid:'G1_005',
+					uname:'宁南',
+					uage:16,
+					usex:'男',
+				},
+				{
+					uid:'G1_006',
+					uname:'张小强',
+					uage:19,
+					usex:'男',
+				},
+				{
+					uid:'G1_007',
+					uname:'张一健',
+					uage:17,
+					usex:'女',
+				},
+				{
+					uid:'G1_008',
+					uname:'宋青书',
+					uage:18,
+					usex:'男',
+				},
+				{
+					uid:'G1_009',
+					uname:'宋慧青',
+					uage:19,
+					usex:'女',
+				},
+				{
+					uid:'G1_010',
+					uname:'李先能',
+					uage:20,
+					usex:'男',
+				},
+			],
+			students_G2:[
+				{
+					uid:'G2_001',
+					uname:'张慧君',
+					uage:17,
+					usex:'男',
+				},
+				{
+					uid:'G2_002',
+					uname:'宋文',
+					uage:18,
+					usex:'男',
+				},
+				{
+					uid:'G2_003',
+					uname:'李慧香',
+					uage:17,
+					usex:'女',
+				},
+				{
+					uid:'G2_004',
+					uname:'成武',
+					uage:19,
+					usex:'女',
+				},
+				{
+					uid:'G2_005',
+					uname:'张文',
+					uage:22,
+					usex:'女',
+				},
+				{
+					uid:'G2_006',
+					uname:'刘强',
+					uage:17,
+					usex:'男',
+				},
+				{
+					uid:'G2_007',
+					uname:'陈小君',
+					uage:20,
+					usex:'男',
+				},
+				{
+					uid:'G2_008',
+					uname:'刘伟强',
+					uage:21,
+					usex:'女',
+				},
+				{
+					uid:'G2_009',
+					uname:'王芳',
+					uage:21,
+					usex:'男',
+				},
+				{
+					uid:'G2_010',
+					uname:'刘生',
+					uage:17,
+					usex:'女',
+				},
+			],
+			students_G3:[
+				{
+					uid:'G3_001',
+					uname:'赵敏倩',
+					uage:18,
+					usex:'男',
+				},
+				{
+					uid:'G3_002',
+					uname:'刘伟强',
+					uage:19,
+					usex:'女',
+				},
+				{
+					uid:'G3_003',
+					uname:'赵倩',
+					uage:21,
+					usex:'男',
+				},
+				{
+					uid:'G3_004',
+					uname:'张明',
+					uage:20,
+					usex:'女',
+				},
+				{
+					uid:'G3_005',
+					uname:'张文',
+					uage:18,
+					usex:'女',
+				},
+				{
+					uid:'G3_006',
+					uname:'张一健',
+					uage:17,
+					usex:'女',
+				},
+				{
+					uid:'G3_007',
+					uname:'刘雯',
+					uage:19,
+					usex:'男',
+				},
+				{
+					uid:'G3_008',
+					uname:'郝强',
+					uage:16,
+					usex:'女',
+				},
+				{
+					uid:'G3_009',
+					uname:'王芬',
+					uage:17,
+					usex:'男',
+				},
+				{
+					uid:'G3_010',
+					uname:'刘俊涛',
+					uage:21,
+					usex:'女',
+				},
+			]
+		};
+		let aClass = ['班级1','班级2','班级3'];
+		let arr = [];
+		for(let key in students){
+			arr.push(key);
+		}
+		let vm = new Vue({
+			el:'#mod-tab',
+			data:{
+				students:students,
+				cls:aClass,
+				tabIdx:0,
+				tabClass:arr,
+			},
+			methods:{}
+		});
+	</script>
+</body>
+</html>
