@@ -12,7 +12,9 @@
 		<div class="mod-tab-hd cf">
 			<div class="tab-item" v-for="(v,i) in cls" v-on:click="tabIdx = i">{{v}}</div>
 		</div>
-		<div class="content">
+		<p class="mod-tips">提示：{{tips}}</p>
+		<div class="content cf">
+			<!-- table -->
 			<div class="tab-table">
 				<div class="thead cf">
 					<div class="th">ID</div>
@@ -28,11 +30,46 @@
 						<div class="td">{{v.usex}}</div>
 					</div>
 				</div>
-				<div class="tfoot"></div>
+				<!-- <div class="tfoot"></div> -->
 			</div>
+			<!-- table end-->
+			<!-- 添加 -->
+			<div class="mod-add" id="mod-add_student">
+				<div class="form-tofill">
+					<div class="form-item cf">
+						<div class="item-name">姓名:</div>
+						<div class="item-toinput"><input class="inp" type="text" name="" id="" v-model="newStudent.uname"></div>
+					</div>
+					<div class="form-item cf">
+						<div class="item-name">年龄:</div>
+						<div class="item-toinput"><input class="inp" type="text" name="" id="" v-model="newStudent.uage"></div>
+					</div>
+					<div class="form-item cf">
+						<div class="item-name">性别:</div>
+						<div class="item-toinput">
+							<label><input type="radio" value="男" v-model="newStudent.usex">男</label>
+							<label><input type="radio" value="女" v-model="newStudent.usex">女</label>
+						</div>
+					</div>
+					<div class="form-item cf">
+						<div class="item-name">班级:</div>
+						<div class="item-toinput">
+							<select class="select-class" v-model="newStudent.uid">
+								<option value="0">--请选择--</option>
+								<option value="G1_">一班</option>
+								<option value="G2_">二班</option>
+								<option value="G3_">二班</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="operating-btns cf">
+					<button v-on:click="addNew">添加</button>
+					<button v-on:click="clearNew">清空</button>
+				</div>
+			</div>
+			<!-- 添加end -->
 		</div>
-		<!-- 添加 弹窗 -->
-		<!-- 添加 弹窗 end -->
 	</div>
 
 	<script>
@@ -224,6 +261,12 @@
 				},
 			]
 		};
+		let newStudent = {
+			uid:'',
+			uname:'',
+			uage:'',
+			usex:'男'
+		}
 		let aClass = ['班级1','班级2','班级3'];
 		let arr = [];
 		for(let key in students){
@@ -236,9 +279,64 @@
 				cls:aClass,
 				tabIdx:0,
 				tabClass:arr,
+				newStudent:newStudent,
+				tips:'',
 			},
-			methods:{}
+			methods:{
+				addNew: function () {
+					if(!this.newStudent.uid || this.newStudent.uname === '' || this.newStudent.uage === ''){
+						this.tips = '输入不能有空';
+						return;
+					}else{
+						this.tips = '';
+					}
+					// 处理uid
+					let cls = 'students'+'_'+this.newStudent.uid.slice(0,2);
+					let students = this.students[cls];
+					let new_id;
+					for(let i=0;i<students.length;i++){
+						let id = students[i].uid.slice(3);
+						let flag = true;
+						if(Number(id) !== (i+1)){
+							new_id = idFomated(i+1);
+							flag = false;
+							break;
+						}
+						if(flag){
+							new_id = idFomated(students.length+1);
+						}
+					}
+					this.newStudent.uid += new_id;
+					// 加入该班级(数组)
+					this.students[cls].push(this.newStudent);
+					// 清空
+					this.newStudent = {
+						uid:'',
+						uname:'',
+						uage:'',
+						usex:'男'
+					}
+				},
+				clearNew:function(){
+					this.newStudent = {
+						uid:'',
+						uname:'',
+						uage:'',
+						usex:'男'
+					}
+				}
+			}
 		});
+		function idFomated(num){
+			if(parseInt(num) === parseFloat(num) && parseInt(num)>0 ){
+				num = parseInt(num);
+				if(num<10){
+					return '00'+num;
+				}else if(num<100){
+					return '0' + num;
+				}
+			}
+		}
 	</script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 @base_cl:skyblue;
-// @white:#fff;
+@wrap_width:815px;
 .fl {
 	float: left;
 }
@@ -11,8 +11,14 @@
 	display: block;
 	clear: both;
 }
+p {
+	margin: 0;
+	padding: 0
+}
 
 .mod-tab {
+	width: @wrap_width;
+	margin: 30px auto 0;
 	padding: 20px;
 	border:10px solid @base_cl;
 	.mod-tab-hd {
@@ -34,28 +40,87 @@
 			border-right: 1px solid #fff;
 		}
 	}
+	.mod-tips {
+		margin-top: 20px;
+		font-size: 14px;
+		color:red;
+	}
 	.content {
+		@base_cl:pink;
 		.tab-table {
 			@td_wid:100px;
 			@td_hgt:30px;
-			@base_cl:pink;
 			.tdStyle {
 				.fl;
 				width: @td_wid;
 				line-height: @td_hgt;
 			}
+			.fl;
+			width: 4*@td_wid;
 			border:2px solid @base_cl;
 			margin-top: 20px;
-			padding: 10px 5px;
+			padding: 10px 15px;
 			text-align: center;
 			.thead {
+				// border-bottom: 2px solid #999;
+				background:@base_cl;
+				color:#fff;
 				&>.th {
 					.tdStyle();
 				}
 			}
 			.tbody {
+				.tr:nth-of-type(2n) {
+					background: #eee;
+				}
 				& .td {
 					.tdStyle();
+				}
+			}
+		}
+		.mod-add {
+			.fr;
+			margin-top: 20px;
+			padding: 20px;
+			border:1px solid @base_cl;
+			.form-tofill {
+				@formItem_hgt:30px;
+				.form-item {
+					margin: 5px 0;
+					.item-name {
+						.fl;
+						width:50px;
+						line-height: @formItem_hgt;
+						text-align: right;
+						margin-right: 20px;
+					}
+					.item-toinput {
+						.fl;
+						.inp {
+							width: 250px;
+							height: @formItem_hgt;
+							box-sizing: border-box;
+						}
+						&>label {
+							line-height: @formItem_hgt;
+						}
+						.select-class {
+						}
+					}
+				}
+			}
+			.operating-btns {
+				width: 110px;
+				margin: 0 auto;
+				button {
+					width: 50px;
+					height: 30px;
+					background: @base_cl;
+					color:#fff;
+					float: left;
+				}
+				button:first-of-type {
+					margin-right: 10px;
 				}
 			}
 		}
