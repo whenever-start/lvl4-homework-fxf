@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自动填充email后缀</title>
+	<script src="../js/vue.min.js"></script>
+	<style>
+		.mod-email {
+			position: relative;
+			width: 250px;
+			margin: 30px auto 0;
+		}
+		.mod-email .email-input {
+			width: 100%;
+			height: 40px;
+			border:1px solid #cdcdcd;
+			box-sizing: border-box;
+		}
+		.mod-email .email-list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			position: absolute;
+			left: 0;
+			top: 100%;
+			width: 100%;
+		}
+		.mod-email .email-list>li {
+			line-height: 30px;
+			margin-bottom: 10px;
+			background: #ddd;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<email-suffix></email-suffix>
+
+	</div>
+	<script>
+		let emailSuffix = {
+			template:`
+				<div class="mod-email">
+					<input type="text" class="email-input" v-model="emailInput" />
+					<ul class="email-list">
+						<li v-for="(v,i) in emailList" @click="emailInput = emailList[i];">{{v}}</li>
+					</ul>
+				</div>
+			`,
+			data(){
+				return {
+					hotWords:['西游记女儿国','复仇者联盟','白鹿原','扶摇','银魂','芳华','古墓丽影'],
+					emailInput:'',
+				}
+			},
+			methods:{
+				emailSelect(){
+					this.emailInput = this.emailList[i];
+				}
+			},
+			computed:{
+				emailList(){
+					if(!this.emailInput || /@/.test(this.emailInput)){
+						return [];
+					}
+					return [
+						this.emailInput + '@qq.com',
+						this.emailInput + '@163.com',
+						this.emailInput + '@sina.com',
+					];
+				}
+			}
+		}
+		new Vue({
+			el:'#app',
+			components:{
+				emailSuffix,
+			}
+		});
+	</script>
+</body>
+</html>

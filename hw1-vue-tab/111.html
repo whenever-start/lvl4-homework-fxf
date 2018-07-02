@@ -11,7 +11,7 @@
 	<div class="mod-tab" id="mod-tab">
 		<div class="mod-tab-hd cf">
 			<!-- 班级切换 -->
-			<div class="tab-item" v-for="(v,i) in cls" :class="{cur:tabIdx === i}" v-on:click="tabIdx = i,pageIdx = 1">{{v}}</div>
+			<div class="tab-item" v-for="(v,i) in cls" :class="{cur:tabIdx === i}" v-on:click="tabIdx = i,pageIdx[tabIdx] = 1">{{v}}</div>
 		</div>
 		<p class="mod-tips">提示：{{tips}}</p>
 		<div class="content cf">
@@ -42,7 +42,7 @@
 				</div>
 				<div class="tfoot">
 					<ul class="mod-page cf" :style="{width:(totalPage * 30) + 'px'}">
-						<li v-for="(v,i) in totalPage" @click="pageIdx = (i+1)" :class="{cur:pageIdx === (i+1)}">{{i+1}}</li>
+						<li v-for="(v,i) in totalPage" @click="pageIdx[tabIdx] = (i+1)" :class="{cur:pageIdx[tabIdx] == (i+1)}">{{i+1}}</li>
 					</ul>
 				</div>
 			</div>
@@ -77,11 +77,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="operating-btns">
-					<!-- <button v-on:click="addNew">添加</button>
-					<button v-on:click="clearNew">清空</button> -->
-					<base-btn btn-style="primary">添加</base-btn>
-					<base-btn>清空</base-btn>
+				<div class="operating-btns cf">
+					<button v-on:click="addNew">添加</button>
+					<button v-on:click="clearNew">清空</button>
 				</div>
 			</div>
 			<!-- 添加end -->
@@ -294,13 +292,6 @@
 		for(let key in students){
 			arr.push(key);
 		}
-		// 按钮组件
-		let buttonComponent = {
-			props:['btnStyle'],
-			template:`
-				<button :class="['btn','btn-'+btnStyle]"><slot></slot></button>
-			`,
-		}
 		let vm = new Vue({
 			el:'#mod-tab',
 			data:{
@@ -310,7 +301,7 @@
 				tabClass:arr,
 				newStudent:newStudent,
 				tips:'',
-				pageIdx:1,
+				pageIdx:[1,1,1],
 				size:5,
 			},
 			methods:{
@@ -363,6 +354,13 @@
 						usex:'男'
 					}
 				},
+				click(){
+					let pageIdx = this.pageIdx,tabIdx = this.tabIdx;
+					
+					console.log('pageIdx',pageIdx)
+					console.log('tabIdx',tabIdx)
+					console.log('pageIdx[tabIdx]',pageIdx[tabIdx]);
+				}
 			},
 			computed:{
 				totalPage(){
@@ -370,7 +368,8 @@
 					return Math.ceil(len/this.size)
 				},
 				studentsPerPage(){
-					let pageIdx = this.pageIdx,size = this.size;
+					let pageIdx = this.pageIdx[this.tabIdx],size = this.size;
+					console.log('perPage',this.students[this.tabClass[this.tabIdx]].slice( (pageIdx-1)*size,(pageIdx-1)*size+size ))
 					return this.students[this.tabClass[this.tabIdx]].slice( (pageIdx-1)*size,(pageIdx-1)*size+size );
 				},
 				emptyTr(){
@@ -379,9 +378,6 @@
 					console.log(this.size-(this.students[this.tabClass[this.tabIdx]].length - (this.totalPage-1)*this.size))
 					return this.size-(this.students[this.tabClass[this.tabIdx]].length - (this.totalPage-1)*this.size);
 				}
-			},
-			components:{
-				baseBtn:buttonComponent,
 			}
 		});
 

@@ -9,9 +9,39 @@
   display: block;
   clear: both;
 }
+ul,
 p {
   margin: 0;
   padding: 0;
+}
+ul {
+  list-style: none;
+}
+.btn {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.3rem;
+  white-space: normal;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.btn-default {
+  color: #333;
+  background: #fff;
+  border-color: #adadad;
+}
+.btn-primary {
+  color: #fff;
+  background: #337ab7;
+  border-color: #2e6da4;
+}
+.btn-info {
+  color: #fff;
+  background: #5bc0de;
+  border-color: #46b8da;
 }
 .mod-tab {
   width: 815px;
@@ -23,10 +53,6 @@ p {
   padding: 5px;
   border: 2px solid skyblue;
 }
-.mod-tab .mod-tab-hd .tabItemStyle {
-  background: skyblue;
-  color: #fff;
-}
 .mod-tab .mod-tab-hd .tab-item {
   float: left;
   background: skyblue;
@@ -34,6 +60,10 @@ p {
   text-align: center;
   width: 100px;
   line-height: 40px;
+}
+.mod-tab .mod-tab-hd .tab-item.cur {
+  background: pink;
+  color: #fff;
 }
 .mod-tab .mod-tab-hd .tab-item:nth-of-type(1),
 .mod-tab .mod-tab-hd .tab-item:nth-of-type(2) {
@@ -66,6 +96,9 @@ p {
   width: 100px;
   line-height: 30px;
 }
+.mod-tab .content .tab-table .tbody .tr {
+  height: 30px;
+}
 .mod-tab .content .tab-table .tbody .tr:nth-of-type(2n) {
   background: #eee;
 }
@@ -74,11 +107,26 @@ p {
   width: 100px;
   line-height: 30px;
 }
+.mod-tab .content .tab-table .tfoot .mod-page {
+  margin: 10px auto 0;
+}
+.mod-tab .content .tab-table .tfoot .mod-page > li {
+  float: left;
+  color: #999;
+  width: 20px;
+  line-height: 20px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+.mod-tab .content .tab-table .tfoot .mod-page > li.cur {
+  color: #fff;
+  background: pink;
+}
 .mod-tab .content .mod-add {
   float: right;
   margin-top: 20px;
   padding: 20px;
-  border: 1px solid pink;
+  border: 1px solid skyblue;
 }
 .mod-tab .content .mod-add .form-tofill .form-item {
   margin: 5px 0;
@@ -100,18 +148,4 @@ p {
 }
 .mod-tab .content .mod-add .form-tofill .form-item .item-toinput > label {
   line-height: 30px;
-}
-.mod-tab .content .mod-add .operating-btns {
-  width: 110px;
-  margin: 0 auto;
-}
-.mod-tab .content .mod-add .operating-btns button {
-  width: 50px;
-  height: 30px;
-  background: pink;
-  color: #fff;
-  float: left;
-}
-.mod-tab .content .mod-add .operating-btns button:first-of-type {
-  margin-right: 10px;
 }

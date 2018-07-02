@@ -1,5 +1,6 @@
 @base_cl:skyblue;
 @wrap_width:815px;
+@pink:pink;
 .fl {
 	float: left;
 }
@@ -11,9 +12,41 @@
 	display: block;
 	clear: both;
 }
+ul,
 p {
 	margin: 0;
 	padding: 0
+}
+ul {
+	list-style: none;
+}
+
+// 按钮组件
+.btn {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.3rem;
+	white-space: normal;
+	border-radius: 4px;
+	cursor: pointer;
+	border: 1px solid transparent;
+}
+.btn-default {
+	color: #333;
+	background: #fff;
+	border-color: #adadad;
+}
+.btn-primary {
+	color: #fff;
+	background: #337ab7;
+	border-color: #2e6da4;
+}
+.btn-info {
+	color: #fff;
+	background: #5bc0de;
+	border-color: #46b8da;
 }
 
 .mod-tab {
@@ -24,16 +57,19 @@ p {
 	.mod-tab-hd {
 		padding: 5px;
 		border:2px solid @base_cl;
-		.tabItemStyle {
-			background: @base_cl;
+		.tabItemStyle(@color) {
+			background: @color;
 			color:#fff;
 		}
 		.tab-item {
 			.fl;
-			.tabItemStyle;
+			.tabItemStyle(@base_cl);
 			text-align: center;
 			width: 100px;
 			line-height: 40px;
+		}
+		.tab-item.cur {
+			.tabItemStyle(@pink);
 		}
 		.tab-item:nth-of-type(1),
 		.tab-item:nth-of-type(2) {
@@ -46,7 +82,6 @@ p {
 		color:red;
 	}
 	.content {
-		@base_cl:pink;
 		.tab-table {
 			@td_wid:100px;
 			@td_hgt:30px;
@@ -57,24 +92,45 @@ p {
 			}
 			.fl;
 			width: 4*@td_wid;
-			border:2px solid @base_cl;
+			border:2px solid @pink;
 			margin-top: 20px;
 			padding: 10px 15px;
 			text-align: center;
 			.thead {
 				// border-bottom: 2px solid #999;
-				background:@base_cl;
+				background:@pink;
 				color:#fff;
 				&>.th {
 					.tdStyle();
 				}
 			}
 			.tbody {
+				.tr {
+					height: @td_hgt;
+				}
 				.tr:nth-of-type(2n) {
 					background: #eee;
 				}
 				& .td {
 					.tdStyle();
+				}
+			}
+			.tfoot {
+				.mod-page {
+					// width 写在vue模板中
+					margin: 10px auto 0;
+					&>li {
+						.fl;
+						color: #999;
+						width: 20px;
+						line-height: 20px;
+						margin: 0 5px;
+						cursor: pointer;
+					}
+					&>li.cur {
+						color: #fff;
+						background: @pink
+					}
 				}
 			}
 		}
@@ -110,18 +166,7 @@ p {
 				}
 			}
 			.operating-btns {
-				width: 110px;
-				margin: 0 auto;
-				button {
-					width: 50px;
-					height: 30px;
-					background: @base_cl;
-					color:#fff;
-					float: left;
-				}
-				button:first-of-type {
-					margin-right: 10px;
-				}
+				
 			}
 		}
 	}

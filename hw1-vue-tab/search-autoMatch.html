@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>搜索框自动匹配</title>
+	<script src="./public/javascripts/vue.min.js"></script>
+</head>
+<style>
+	ul {
+		/*list-style: none;*/
+	}
+</style>
+<body>
+	<div class="test" :style="{background:'red'}">123</div>
+	<div id="wrap">
+		<input type="text">
+		<!-- <div :style="background='red'"></div> -->
+		<ul class="match-list" :style="redCl">
+			<li v-for="(v,i) in matchArr">{{i}}</li>
+		</ul>
+	</div>
+	<script>
+		let vm = new Vue({
+			el:'#wrap',
+			data:{
+				matchArr:[
+					'模板语法',
+					'计算属性和侦听器',
+					'条件渲染',
+					'列表渲染'
+				],
+				redCl:{
+					color:'red'
+				}
+			}
+		});
+		new Vue({
+			el:'.test',
+		});
+	</script>
+</body>
+</html>
