@@ -8,7 +8,6 @@
 		/*开关组件*/
 		.component-switch {
 			display: inline-block;
-			transition: all 0.3s;
 		}
 		.component-switch:after {
 			content: '';
@@ -25,6 +24,7 @@
 				background: #13ce66;
 				cursor: pointer;
 				box-sizing: border-box;
+				transition: all .3s;
 			}
 			.component-switch-main:after {
 				content: '';
@@ -93,10 +93,26 @@
 	</style>
 </head>
 <body>
-	<div id="app">
-		<custom-switch size="small" bg-color="#409eff" open-text="开启" close-text="关闭"></custom-switch>
-		<custom-switch size="default" open-text="on" close-text="off"></custom-switch>
-		<custom-switch size="large" disabled></custom-switch>
+	<h3>大小</h3>
+	<div id="app1">
+		<custom-switch size="small"></custom-switch>
+		<custom-switch></custom-switch>
+		<custom-switch size="large"></custom-switch>
+	</div>
+	<h3>颜色</h3>
+	<div id="app2">
+		<custom-switch bg-color="#409eff"></custom-switch>
+		<custom-switch bg-color="orange"></custom-switch>
+		<custom-switch bg-color="pink"></custom-switch>
+	</div>
+	<h3>禁用</h3>
+	<div id="app3">
+		<custom-switch disabled></custom-switch>
+	</div>
+	<h3>文字</h3>
+	<div id="app4">
+		<custom-switch open-text="开启" close-text="关闭"></custom-switch>
+		<custom-switch open-text="按年付费" close-text="按月付费"></custom-switch>
 	</div>
 	<script>
 		Vue.component('custom-switch',{
@@ -104,7 +120,7 @@
 			template:`
 				<div class="component-switch">
 					<div class="component-switch-main"
-						:style="{background:bgColor}"
+						:style="{background:bgColor_show}"
 						:class="[size,{off:isOff},{'is-disabled':isDisabled}]"
 						@click="turnOnOff">
 					</div>
@@ -139,11 +155,29 @@
 				isDisabled(){
 					console.log('disabled',this.disabled === '')
 					return this.disabled === undefined ? false : true;
+				},
+				bgColor_show(){
+					if(this.bgColor){
+						if(this.isOff){
+							return '#eaecf0';
+						}else{
+							return this.bgColor;
+						}
+					}
 				}
 			}
 		});
 		new Vue({
-			el:'#app',
+			el:'#app1',
+		});
+		new Vue({
+			el:'#app2',
+		});
+		new Vue({
+			el:'#app3',
+		});
+		new Vue({
+			el:'#app4',
 		});
 	</script>
 </body>
