@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>开关组件</title>
+	<script src="../js/vue.min.js"></script>
+	<style>
+		/*开关组件*/
+		.component-switch {
+			display: inline-block;
+			transition: all 0.3s;
+		}
+		.component-switch:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+		/*默认*/
+			.component-switch-main {
+				float: left;
+				position: relative;
+				width: 48px;
+				height: 24px;
+				border-radius: 15px;
+				background: #13ce66;
+				cursor: pointer;
+				box-sizing: border-box;
+			}
+			.component-switch-main:after {
+				content: '';
+				position: absolute;
+				top: 1px;
+				left: auto;
+				right: 1px;
+				width: 22px;
+				height: 22px;
+				border-radius: 50%;
+				background: #fff;
+			}
+			.component-switch-text {
+				float: left;
+				margin-left: 10px;
+				font-size: 14px;
+				line-height: 24px;
+			}
+		/*默认 end*/
+		/*关闭状态*/
+			.component-switch-main.off {
+				background: #ff4949;
+			}
+			.component-switch-main.off:after {
+				right: auto;
+				left: 1px;
+			}
+		/*关闭状态 end*/
+		/*size*/
+			.component-switch-main.small {
+				width: 38px;
+				height: 18px;
+			}
+			.component-switch-main.small+.component-switch-text {
+				font-size: 12px;
+				line-height: 18px;
+			}
+			.component-switch-main.small:after {
+				width: 16px;
+				height: 16px;
+			}
+			/*size=large*/
+			.component-switch-main.large {
+				width: 58px;
+				height: 28px;
+				border-radius: 20px;
+			}
+			.component-switch-main.large+.component-switch-text {
+				font-size: 16px;
+				line-height: 28px;
+			}
+			.component-switch-main.large:after {
+				width: 26px;
+				height: 26px;
+			}
+		/*size end*/
+		/*禁用*/
+			.component-switch-main.is-disabled {
+				cursor: not-allowed;
+			}
+			.component-switch-main.is-disabled {
+				opacity: .5;
+			}
+		/*禁用	end*/
+		/*开关组件	end*/
+	</style>
+</head>
+<body>
+	<div id="app">
+		<custom-switch size="small" bg-color="#409eff" open-text="开启" close-text="关闭"></custom-switch>
+		<custom-switch size="default" open-text="on" close-text="off"></custom-switch>
+		<custom-switch size="large" disabled></custom-switch>
+	</div>
+	<script>
+		Vue.component('custom-switch',{
+			props:['size','bgColor','openText','closeText','disabled'],
+			template:`
+				<div class="component-switch">
+					<div class="component-switch-main"
+						:style="{background:bgColor}"
+						:class="[size,{off:isOff},{'is-disabled':isDisabled}]"
+						@click="turnOnOff">
+					</div>
+					<div class="component-switch-text">{{text}}</div>
+				</div>
+			`,
+			data(){
+				return {
+					isOff:false,
+				}
+			},
+			watch:{
+				bgColor_save:{
+					handler:function(newV,oldV){
+						console.log(newV,oldV);
+					}
+				}
+			},
+			methods:{
+				turnOnOff(){
+					if(this.isDisabled === '' || this.isDisabled){
+						return;
+					}else {
+						this.isOff = !this.isOff;
+					}
+				}
+			},
+			computed:{
+				text(){
+					return this.isOff ? this.closeText : this.openText;
+				},
+				isDisabled(){
+					console.log('disabled',this.disabled === '')
+					return this.disabled === undefined ? false : true;
+				}
+			}
+		});
+		new Vue({
+			el:'#app',
+		});
+	</script>
+</body>
+</html>
