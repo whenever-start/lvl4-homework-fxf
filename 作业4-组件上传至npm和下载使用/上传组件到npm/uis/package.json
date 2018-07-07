@@ -1,0 +1,12 @@
+{
+  "name": "fxf-uis",
+  "version": "1.0.1",
+  "description": "修正 1.0.1 版本的错误",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords":["fxf"],
+  "author": "fxf",
+  "license": "ISC"
+}
